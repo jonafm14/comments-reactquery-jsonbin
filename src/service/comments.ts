@@ -57,7 +57,7 @@ export const updateComment = async (comment: Comment, id: string) => {
   const comments = await getComments()
 
   const updatedComment = {...comment, id}
-  const commentToUpdate = [...comments, updatedComment]
+  const commentToUpdate = comments.map((item: CommentWithId) => item.id === id ? updatedComment : item)
 
   const response = await fetch('https://api.jsonbin.io/v3/b/64d27be5b89b1e2299cd7065', {
     method: 'PUT',
@@ -74,4 +74,5 @@ export const updateComment = async (comment: Comment, id: string) => {
 
   return updatedComment
 }
+
 
