@@ -6,7 +6,7 @@ import { Results } from './components/Results'
 
 function App () {
   const { data, isLoading, error } = useQuery<CommentWithId[]>(
-    ['comments'], // <-----
+    ['comments'],
     getComments
   )
   const queryClient = useQueryClient()

@@ -52,3 +52,26 @@ export const postComment = async (comment: Comment) => {
 
   return newComment
 }
+
+export const updateComment = async (comment: Comment, id: string) => {
+  const comments = await getComments()
+
+  const updatedComment = {...comment, id}
+  const commentToUpdate = [...comments, updatedComment]
+
+  const response = await fetch('https://api.jsonbin.io/v3/b/64d27be5b89b1e2299cd7065', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Master-Key': apiKey
+    },
+    body: JSON.stringify(commentToUpdate)
+  })
+
+  if (!response.ok) {
+    throw new Error('Failed to update comment.')
+  }
+
+  return updatedComment
+}
+
